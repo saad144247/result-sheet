@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Grade Calculator</title>
+</head>
+<body>
+    <h1>Subject Grade Calculator</h1>
+    
+    <!-- Physics Input -->
+    <label for="totalMarksPhysics">Total Marks (Physics):</label>
+    <input type="number" id="totalMarksPhysics" placeholder="Enter total marks in Physics"><br><br>
+
+    <label for="obtainedMarksPhysics">Obtained Marks (Physics):</label>
+    <input type="number" id="obtainedMarksPhysics" placeholder="Enter obtained marks in Physics"><br><br>
+
+    <!-- Chemistry Input -->
+    <label for="totalMarksChemistry">Total Marks (Chemistry):</label>
+    <input type="number" id="totalMarksChemistry" placeholder="Enter total marks in Chemistry"><br><br>
+
+    <label for="obtainedMarksChemistry">Obtained Marks (Chemistry):</label>
+    <input type="number" id="obtainedMarksChemistry" placeholder="Enter obtained marks in Chemistry"><br><br>
+
+    <!-- Math Input -->
+    <label for="totalMarksMath">Total Marks (Math):</label>
+    <input type="number" id="totalMarksMath" placeholder="Enter total marks in Math"><br><br>
+
+    <label for="obtainedMarksMath">Obtained Marks (Math):</label>
+    <input type="number" id="obtainedMarksMath" placeholder="Enter obtained marks in Math"><br><br>
+
+    <!-- English Input -->
+    <label for="totalMarksEnglish">Total Marks (English):</label>
+    <input type="number" id="totalMarksEnglish" placeholder="Enter total marks in English"><br><br>
+
+    <label for="obtainedMarksEnglish">Obtained Marks (English):</label>
+    <input type="number" id="obtainedMarksEnglish" placeholder="Enter obtained marks in English"><br><br>
+
+    <button onclick="calculateGrades()">Calculate</button><br><br>
+
+    <p id="result"></p>
+
+    <script>
+        function calculateGrades() {
+            const subjects = ['Physics', 'Chemistry', 'Math', 'English'];
+            let resultHtml = '';
+
+            for (let subject of subjects) {
+                const totalMarks = parseFloat(document.getElementById('totalMarks' + subject).value);
+                const obtainedMarks = parseFloat(document.getElementById('obtainedMarks' + subject).value);
+
+                if (isNaN(totalMarks) || isNaN(obtainedMarks)) {
+                    resultHtml += `${subject}: Please enter valid numbers.<br>`;
+                    continue;
+                }
+
+                if (totalMarks <= 0) {
+                    resultHtml += `${subject}: Total marks should be greater than zero.<br>`;
+                    continue;
+                }
+
+                const percentage = (obtainedMarks / totalMarks) * 100;
+                let grade;
+
+                if (percentage < 70) {
+                    grade = 'B';
+                } else if (percentage < 80) {
+                    grade = 'A';
+                } else {
+                    grade = 'A+';
+                }
+
+                resultHtml += `${subject} - Percentage: ${percentage.toFixed(2)}%<br>Grade: ${grade}<br><br>`;
+            }
+
+            document.getElementById('result').innerHTML = resultHtml;
+        }
+    </script>
+</body>
+</html>
